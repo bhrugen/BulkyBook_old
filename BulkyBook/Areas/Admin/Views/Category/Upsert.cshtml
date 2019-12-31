@@ -1,7 +1,29 @@
-﻿
+﻿@model BulkyBook.Models.Category
+
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Upsert</h1>
 
+<form method="post">
+    <div class="row p-3 border">
+        <div class="col-12 border-bottom">
+            <h2 class="text-primary">TITLE</h2>
+        </div>
+        <div class="col-8 pt-4">
+            <div class="form-group row">
+                <div class="col-4">
+                    NAME
+                </div>
+                <div class="col-8">
+                    TEXTBOX FOR NAME
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-8 offset-4">
+                    EDIT | BACK
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

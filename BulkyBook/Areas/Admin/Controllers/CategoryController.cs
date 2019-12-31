@@ -39,8 +39,6 @@ namespace BulkyBook.Areas.Admin.Controllers
             }
             return View(category);
 
-
-            return View();
         }
 
 
