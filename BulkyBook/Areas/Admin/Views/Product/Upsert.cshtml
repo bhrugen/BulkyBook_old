@@ -138,6 +138,12 @@
                 </div>
             </div>
         </div>
+        @if (Model.Product.Id != 0)
+        {
+            <div class="col-3 offset-1 pt-4">
+                <img src="@Model.Product.ImageUrl" width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />
+            </div>
+        }
     </div>
 </form>
 
@@ -155,12 +161,12 @@
 
 
     function validateInput() {
-        if (document.getElementById("uploadBox").value = "") {
+        if (document.getElementById("uploadBox").value == "") {
             swal("Error", "Please select an image", "error");
             return false;
         }
         return true;
-    }
+    };
 
 </script>
 
