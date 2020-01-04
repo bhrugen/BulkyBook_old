@@ -10,7 +10,7 @@ namespace BulkyBook.Utility
     {
         public Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
-            return null;
+            throw new NotImplementedException();
         }
     }
 }
