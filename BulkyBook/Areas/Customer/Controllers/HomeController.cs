@@ -10,6 +10,7 @@ using BulkyBook.Models.ViewModels;
 using BulkyBook.DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using BulkyBook.Utility;
 
 namespace BulkyBook.Areas.Customer.Controllers
 {
@@ -64,8 +65,16 @@ namespace BulkyBook.Areas.Customer.Controllers
                 if (cartFromDb == null)
                 {
                     //no records exists in database for that product for that user
-
+                    _unitOfWork.ShoppingCart.Add(CartObject);
                 }
+                else
+                {
+                    cartFromDb.Count += CartObject.Count;
+                    //_unitOfWork.ShoppingCart.Update(cartFromDb);
+                }
+                _unitOfWork.Save();
+
+                return RedirectToAction(nameof(Index));
             }
             else
             {
