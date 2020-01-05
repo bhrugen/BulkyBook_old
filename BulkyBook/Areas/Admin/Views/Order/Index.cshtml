@@ -1,0 +1,60 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<div class="border p-3">
+    <div class="d-flex justify-content-between mb-3">
+        <div class="p-2">
+            <h2 class="text-primary">Order's List </h2>
+        </div>
+        <div class="p-2">
+            <ul class="list-group list-group-horizontal-sm">
+                <a style="text-decoration:none;" asp-controller="Order"
+                   asp-action="Index" asp-route-status="inprocess">
+                    <li class="list-group-item">In Process</li>
+                </a>
+                <a style="text-decoration:none;" asp-controller="Order"
+                   asp-action="Index" asp-route-status="pending">
+                    <li class="list-group-item">Pending</li>
+                </a>
+                <a style="text-decoration:none;" asp-controller="Order"
+                   asp-action="Index" asp-route-status="completed">
+                    <li class="list-group-item">Completed</li>
+                </a>
+                <a style="text-decoration:none;" asp-controller="Order"
+                   asp-action="Index" asp-route-status="rejected">
+                    <li class="list-group-item">Rejected</li>
+                </a>
+                <a style="text-decoration:none;" asp-controller="Order"
+                   asp-action="Index" asp-route-status="all">
+                    <li class="list-group-item">All</li>
+                </a>
+            </ul>
+        </div>
+    </div>
+
+    <br /><br />
+
+    <table id="tblData" class="table table-striped table-bordered" style="width:100%">
+        <thead class="thead-dark">
+            <tr class="table-info">
+                <th>Id</th>
+                <th>Name</th>
+                <th>Phone Number</th>
+                <th>Email</th>
+                <th>Order Status</th>
+                <th>Amount</th>
+                <th></th>
+            </tr>
+        </thead>
+    </table>
+
+</div>
+
+
+@section Scripts{
+
+    <script src="~/js/order.js"></script>
+}
