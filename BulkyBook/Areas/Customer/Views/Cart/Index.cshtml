@@ -1,0 +1,88 @@
+﻿@model BulkyBook.Models.ViewModels.ShoppingCartVM
+
+<form method="post">
+    <br />
+    @if (Model.ListCart.Count() > 0)
+    {
+
+    <div class="backgroundWhiteBorder">
+        <div class="container">
+            <div class="card">
+                <div class="card-header bg-dark text-light ml-0 row container">
+                    <div class="col-6">
+                        <i class="fa fa-shopping-cart"></i> &nbsp;
+                        Shopping Cart
+                    </div>
+                    <div class="col-6 text-right">
+                        <a class="btn btn-outline-info btn-sm">Continue Shopping</a>
+                    </div>
+                </div>
+                
+                <div class="card-body">
+                    @foreach (var item in Model.ListCart)
+                    {
+                        <div class="row">
+                            <div class="d-none d-lg-block col-lg-1 text-center py-2">
+                                <img src="https://via.placeholder.com/150" class="rounded" width="100%" />
+                            </div>
+                            <div class="col-12 text-sm-center col-lg-6 text-lg-left">
+                                <h5><strong>--TITLE--</strong></h5>
+                                <p><small>--DESCRIPTION--</small></p>
+                            </div>
+                            <div class="col-12 text-sm-center col-lg-5 text-lg-right row">
+                                <div class="col-4 text-md-right" style="padding-top:5px;">
+                                    <h6><strong>--Price --<span class="text-muted">x</span> --Count-- </strong></h6>
+                                </div>
+                                <div class="col-6 col-sm-4 col-lg-6">
+                                    <div class="float-right mx-1">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </div>
+                                    <div class="float-right mx-1">
+                                        <button type="submit" class="btn btn-danger">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-2 col-sm-4 col-lg-2 text-right">
+                                    <button type="submit" class="btn btn-outline-danger">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                    }
+
+                    <div class="row">
+                        <div class="col-12 col-md-6 offset-md-6 col-lg-4 offset-lg-8 pr-4">
+                            <ul class="list-group">
+                                <li class="list-group-item d-flex justify-content-between bg-light">
+                                    <span class="text-info"> Total (USD)</span>
+                                    <strong class="text-info">$ <span id="txtOrderTotal">--TOTAL--</span></strong>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+                
+                <div class="card-footer">
+                    <div class="card-footer row">
+
+                        <div class="col-sm-12 col-lg-4 col-md-6 offset-lg-8 offset-md-6 ">
+
+                            <a class="btn btn-success form-control">Summary</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+    else
+    {
+        <div>There are no items in the shopping cart.</div>
+    }
+</form>
