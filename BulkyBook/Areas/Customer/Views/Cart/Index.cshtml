@@ -14,7 +14,7 @@
                         Shopping Cart
                     </div>
                     <div class="col-6 text-right">
-                        <a class="btn btn-outline-info btn-sm">Continue Shopping</a>
+                        <a asp-area="Customer" asp-controller="Home" asp-action="Index" class="btn btn-outline-info btn-sm">Continue Shopping</a>
                     </div>
                 </div>
                 
@@ -23,15 +23,15 @@
                     {
                         <div class="row">
                             <div class="d-none d-lg-block col-lg-1 text-center py-2">
-                                <img src="https://via.placeholder.com/150" class="rounded" width="100%" />
+                                <img src="@item.Product.ImageUrl" class="rounded" width="100%" />
                             </div>
                             <div class="col-12 text-sm-center col-lg-6 text-lg-left">
-                                <h5><strong>--TITLE--</strong></h5>
-                                <p><small>--DESCRIPTION--</small></p>
+                                <h5><strong>@item.Product.Title</strong></h5>
+                                <p><small>@item.Product.Description</small></p>
                             </div>
                             <div class="col-12 text-sm-center col-lg-5 text-lg-right row">
                                 <div class="col-4 text-md-right" style="padding-top:5px;">
-                                    <h6><strong>--Price --<span class="text-muted">x</span> --Count-- </strong></h6>
+                                    <h6><strong>$@item.Price<span class="text-muted">x</span> @item.Count </strong></h6>
                                 </div>
                                 <div class="col-6 col-sm-4 col-lg-6">
                                     <div class="float-right mx-1">
@@ -60,7 +60,7 @@
                             <ul class="list-group">
                                 <li class="list-group-item d-flex justify-content-between bg-light">
                                     <span class="text-info"> Total (USD)</span>
-                                    <strong class="text-info">$ <span id="txtOrderTotal">--TOTAL--</span></strong>
+                                    <strong class="text-info">$ <span id="txtOrderTotal">@Model.OrderHeader.OrderTotal</span></strong>
                                 </li>
                             </ul>
                         </div>
@@ -70,11 +70,26 @@
                 
                 <div class="card-footer">
                     <div class="card-footer row">
-
+                        @if (!Model.OrderHeader.ApplicationUser.EmailConfirmed
+                        && Model.OrderHeader.ApplicationUser.CompanyId != null
+                        && Model.OrderHeader.ApplicationUser.Company.IsAuthorizedCompany)
+                        {
+                        <div class="col-8 text-danger">
+                            Email Must be confirmed for authorized customers!
+                        </div>
+                        <div class="col-4">
+                            <button type="submit" class="btn btn-outline-warning btn-sm">
+                                Click here to resend confirmation Email!
+                            </button>
+                        </div>
+                        }
+                        else
+                        {
                         <div class="col-sm-12 col-lg-4 col-md-6 offset-lg-8 offset-md-6 ">
 
-                            <a class="btn btn-success form-control">Summary</a>
+                            <a asp-area="Customer" asp-controller="Cart"  asp-action="Summary" class="btn btn-success form-control">Summary</a>
                         </div>
+                        }
                     </div>
                 </div>
             </div>
