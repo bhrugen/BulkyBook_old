@@ -1,4 +1,7 @@
 ﻿@model BulkyBook.Models.ViewModels.ShoppingCartVM
+@using Microsoft.Extensions.Options
+
+@inject IOptions<BulkyBook.Utility.StripeSettings> Stripe
 
 <form method="post">
     <br />
@@ -103,6 +106,22 @@
                         </div>
                         <div class="col-12 col-md-4">
 
+                            @{ 
+                                var OrderTotalForStripe = Model.OrderHeader.OrderTotal * 100;
+                            }
+                            <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                    data-keyboard="@Stripe.Value.PublishableKey"
+                                    data-amount="@OrderTotalForStripe"
+                                    data-name="Bulky Book"
+                                    data-label="Place Order"
+                                    data-description="Get Books, For Less"
+                                    data-locale="auto"
+                                    data-allow-remember-me="false"
+                                    data-image="https://stripe.com/img/documentation/checkout/marketplace.png">
+                            </script>
+                            <script>
+                                document.getElementsByClassName("stripe-button-el")[0].style.display = 'none';
+                            </script>
                             <button type="submit" value="Place Order" class="btn btn-success form-control">Place Order</button>
                         </div>
                     </div>
