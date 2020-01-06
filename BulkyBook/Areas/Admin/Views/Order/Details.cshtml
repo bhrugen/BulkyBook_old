@@ -196,25 +196,29 @@
                                 <span class="text-primary">Order Summary</span>
                             </h4>
                             <ul class="list-group mb-3">
-                                <li class="list-group-item d-flex justify-content-between">
+                                @foreach (var details in Model.OrderDetails)
+                                {
+                                <li class="list-group-item d-flex justify-content-between p-2">
                                     <div class="row container">
                                         <div class="col-8">
-                                            <h6 class="my-0">--Product.Title--</h6>
-                                            <small class="text-muted">Price : --Price--</small>
-                                            <small class="text-muted">Quantity : --Count--</small>
+                                            <input type="hidden" asp-for="@details.Id" />
+                                            <h6 class="my-0 text-primary">@details.Product.Title</h6>
+                                            <small class="text-muted">Price : @details.Price</small><br />
+                                            <small class="text-muted">Quantity : @details.Count</small>
                                         </div>
                                         <div class="col-4">
-                                            <h5 class="text-success">--price*count--</h5>
+                                            <p class="text-success">@(String.Format("{0:C}",details.Count*details.Price))</p>
                                         </div>
                                     </div>
                                 </li>
+                                }
                                 <li class="list-group-item bg-info">
                                     <div class="row container">
                                         <div class="col-6">
                                             <h5 class="text-white">TOTAL </h5>
                                         </div>
                                         <div class="col-6 text-right">
-                                            <h5 class="text-white">--GRAND TOTAL-</h5>
+                                            <h5 class="text-white">@(String.Format("{0:C}", Model.OrderHeader.OrderTotal))</h5>
                                         </div>
                                     </div>
                                 </li>
