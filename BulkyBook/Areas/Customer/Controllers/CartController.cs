@@ -240,13 +240,13 @@ namespace BulkyBook.Areas.Customer.Controllers
                 var service = new ChargeService();
                 Charge charge = service.Create(options);
 
-                if (charge.BalanceTransactionId == null)
+                if (charge.Id == null)
                 {
                     ShoppingCartVM.OrderHeader.PaymentStatus = SD.PaymentStatusRejected;
                 }
                 else
                 {
-                    ShoppingCartVM.OrderHeader.TransactionId = charge.BalanceTransactionId;
+                    ShoppingCartVM.OrderHeader.TransactionId = charge.Id;
                 }
                 if (charge.Status.ToLower() == "succeeded")
                 {
