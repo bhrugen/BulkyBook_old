@@ -28,7 +28,7 @@ namespace BulkyBook.TagHelpers
         {
             TagBuilder result = new TagBuilder("div");
 
-            for(int i = 1; i < PageModel.TotalPage; i++)
+            for(int i = 1; i <= PageModel.TotalPage; i++)
             {
                 TagBuilder tag = new TagBuilder("a");
                 string url = PageModel.urlParam.Replace(":", i.ToString());
