@@ -18,7 +18,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primary border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">BulkyBook</a>
+                <a class="navbar-brand" asp-area="Customer" asp-controller="Home" asp-action="Index">BulkyBook</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -26,9 +26,7 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
+
 
                         @if (User.IsInRole(SD.Role_Admin))
                         {
@@ -57,45 +55,51 @@
                                 </div>
                             </li>
                         }
-                    <li class="nav-item">
-                        <a class="nav-link" asp-area="Admin" asp-controller="Order" asp-action="Index">
-                            @if (User.IsInRole(SD.Role_Employee) || User.IsInRole(SD.Role_Admin))
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="Admin" asp-controller="Order" asp-action="Index">
+                                @if (User.IsInRole(SD.Role_Employee) || User.IsInRole(SD.Role_Admin))
+                                {
+                                    <span>Manage Order</span>
+                                }
+                                else
+                                {
+                                    <span>Order History</span>
+                                }
+                            </a>
+                        </li>
+                        @if (User.IsInRole(SD.Role_Employee) || User.IsInRole(SD.Role_Admin))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="Admin" asp-controller="BrainTree" asp-action="Index">BrainTree</a>
+                            </li>
+                        }
+                        @if (HttpContextAccessor.HttpContext.Session.GetInt32(SD.ssShoppingCart) != null)
                             {
-                                <span>Manage Order</span>
+                                <li style="color:white;">
+                                    <a asp-area="Customer" asp-controller="Cart" asp-action="Index" class="nav-link">
+                                        @{
+                                            var count = HttpContextAccessor.HttpContext.Session.GetInt32(SD.ssShoppingCart);
+                                        }
+                                        <i class="fas fa-shopping-cart"></i> &nbsp; (@count)
+                                    </a>
+                                </li>
                             }
                             else
                             {
-                                <span>Order History</span>
+                                <li style="color:white;">
+                                    <a href="#" class="nav-link">
+                                        <i class="fas fa-shopping-cart"></i> &nbsp; (0)
+                                    </a>
+                                </li>
                             }
-                        </a>
-                    </li>
-                        @if (HttpContextAccessor.HttpContext.Session.GetInt32(SD.ssShoppingCart) != null)
-                        {
-                            <li style="color:white;">
-                                <a asp-area="Customer" asp-controller="Cart" asp-action="Index" class="nav-link">
-                                    @{
-                                        var count = HttpContextAccessor.HttpContext.Session.GetInt32(SD.ssShoppingCart);
-                                    }
-                                    <i class="fas fa-shopping-cart"></i> &nbsp; (@count)
-                                </a>
-                            </li>
-                        }
-                        else
-                        {
-                            <li style="color:white;">
-                                <a href="#" class="nav-link">
-                                    <i class="fas fa-shopping-cart"></i> &nbsp; (0)
-                                </a>
-                            </li>
-                        }
-                    </ul>
+                        </ul>
                 </div>
             </div>
         </nav>
     </header>
     <div class="container">
         <main role="main" class="pb-3">
-            <partial name="_Notifications" />
+            <partial name="_Notifications">
             @RenderBody()
         </main>
     </div>
