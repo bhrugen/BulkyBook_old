@@ -99,10 +99,14 @@ namespace BulkyBook.Areas.Admin.Controllers
             var objFromDb =  await _unitOfWork.Category.GetAsync(id);
             if (objFromDb == null)
             {
+                TempData["Error"] = "Error deleting Category";
                 return Json(new { success = false, message = "Error while deleting" });
             }
+
             await _unitOfWork.Category.RemoveAsync(objFromDb);
             _unitOfWork.Save();
+
+            TempData["Success"] = "Category successfully deleted";
             return Json(new { success = true, message = "Delete Successful" });
 
         }
