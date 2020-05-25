@@ -189,6 +189,11 @@ namespace BulkyBook.Areas.Customer.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult SummaryPost(string stripeToken)
         {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction(nameof(Summary));
+            }
+
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
             ShoppingCartVM.OrderHeader.ApplicationUser = _unitOfWork.ApplicationUser
