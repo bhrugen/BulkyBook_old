@@ -142,10 +142,11 @@ namespace BulkyBook.Areas.Customer.Controllers
             var cart = _unitOfWork.ShoppingCart.GetFirstOrDefault
                             (c => c.Id == cartId, includeProperties: "Product");
 
-             var cnt = _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == cart.ApplicationUserId).ToList().Count;
-                _unitOfWork.ShoppingCart.Remove(cart);
-                _unitOfWork.Save();
-                HttpContext.Session.SetInt32(SD.ssShoppingCart, cnt - 1);
+            var cnt = HttpContext.Session.GetObject<int>(SD.ssShoppingCart);
+
+            _unitOfWork.ShoppingCart.Remove(cart);
+            _unitOfWork.Save();
+            HttpContext.Session.SetInt32(SD.ssShoppingCart, cnt - 1);
             
 
             return RedirectToAction(nameof(Index));
@@ -188,6 +189,11 @@ namespace BulkyBook.Areas.Customer.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult SummaryPost(string stripeToken)
         {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction(nameof(Summary));
+            }
+
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
             ShoppingCartVM.OrderHeader.ApplicationUser = _unitOfWork.ApplicationUser

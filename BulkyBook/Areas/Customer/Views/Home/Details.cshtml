@@ -10,8 +10,8 @@
                     <p class="text-warning">by @Model.Product.Author</p>
                 </div>
                 <div class="col-12 col-md-6 text-md-right pt-4">
-                    <span class="badge badge-success pt-2" style="height:30px;">@Model.Product.CoverType.Name</span>
-                    <span class="badge badge-warning pt-2" style="height:30px;">@Model.Product.Category.Name</span>
+                    <span class="badge badge-success pt-2" style="height:30px;" title="Cover Type">@Model.Product.CoverType.Name</span>
+                    <span class="badge badge-warning pt-2" style="height:30px;" title="Category Name">@Model.Product.Category.Name</span>
                 </div>
             </div>
             <div class="card-body">
@@ -58,7 +58,7 @@
                             </div>
                             <div class="row pl-2">
                                 <div class="col-2 text-primary"><h4>Count</h4></div>
-                                <div class="col-10"><input class="form-control" asp-for="Count" /></div>
+                                <div class="col-10"><input class="form-control" min="1" asp-for="Count" /></div>
                             </div>
                         </div>
                         <div class="col-12 col-lg-3 offset-lg-1 text-center">
@@ -69,8 +69,8 @@
             </div>
             <div class="card-footer">
                 <div class="row">
-                    <div class="col-12 col-md-6 pb-1">
-                        <a asp-action="Index" class="btn btn-success form-control  btn-square btn-lg" style="height:50px;">Back to List</a>
+                    <div class="col-12 col-md-6 pb-1 text-center bg-light">
+                        <a asp-controller="Home" asp-action="Index" lass="btn btn-success form-control  btn-square btn-lg" style="height:50px;"> <i class="fas fa-hand-point-left"></i> Back to List</a>
                     </div>
                     <div class="col-12 col-md-6 pb-1">
                         <button type="submit" value="Add to Cart" class="btn btn-primary btn-square btn-lg form-control" style="height:50px;">Add to Cart</button>
